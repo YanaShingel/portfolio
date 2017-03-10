@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Taxes In Backoffice</title>
+<link rel="stylesheet" type="text/css"
+	href="/resources/bower_components/pure/pure-release-0.5.0/pure.css">
+<link rel="stylesheet" type="text/css"
+	href="/resources/bower_components/pure/pure-release-0.5.0/grids-responsive.css">
+<link rel="stylesheet" type="text/css"
+	href="/resources/bower_components/components-font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="../css/style.css">
+<link rel="stylesheet" type="text/css" href="../css/theme.css">
+<link rel="stylesheet"
+	href="/resources/bower_components/angularjs-datetime-picker/angularjs-datetime-picker.css" />
+<link rel="stylesheet"
+	href="/resources/bower_components/angularjs-datetime-picker/angularjs-datetime-picker.css" />
+<link rel="stylesheet" type="text/css"
+	href="/resources/admin/taxesinbackoffice/css/taxesinbackoffice.css">
+<link rel="stylesheet" type="text/css"
+	href="/resources/bower_components/ng-tags-input/ng-tags-input.css">
+</head>
+<body class="pure-skin-theme zoom" ng-app="adminApp"
+	ng-controller="TaxesInBackOfficeCtrl">
+
+	<header class="page-header pure-g">
+		<div class="pure-u-lg-1-2 pure-u-1">
+			<a class="pure-menu-heading" href="#"> </a> <span
+				class="header-element page-title"></span>
+		</div>
+		<div class="pure-u-1-3"></div>
+		<div class="pure-u-1-6 headersLogin">
+			Login:{{suggest.userLogin}}</div>
+		<div class="pure-u-1-6 logout-link">
+			<a href="#" ng-click="logout()">Logout</a>
+		</div>
+	</header>
+
+	<menu class="pure-u-lg-1-8 pure-u-1">
+		<div ng-include="'/resources/admin/include/menu.html'"></div>
+	</menu>
+
+	<div class="all-data-content top-panel">
+		<div class="content payment-content">
+			<form class="pure-form pure-form-stacked widthForm">
+				<fieldset>
+					<div class="pure-u-1-8">
+						<button class="pure-button" ng-click="createForm()">
+							<i class="fa fa-plus"></i> Create
+						</button>
+					</div>
+					<div class="pure-u-1-1 marginTop10px">
+
+						<div class="pure-u-7-8">
+							<div class="pure-u-1-2">
+								<div>
+									<label>Country</label>
+									<tags-input ng-model="vm.picked.countryFilter"
+										class="widthInput" placeholder="Add a country"
+										add-from-autocomplete-only="true"
+										on-tag-added="addCountry($tag)"
+										on-tag-removed="removeCountry($tag)" key-property="id"
+										display-property="name" replace-spaces-with-dashes="false">
+									<auto-complete load-on-down-arrow="true" min-length="1"
+										source="suggestCountryNames($query)"> </auto-complete> </tags-input>
+								</div>
+
+								<div>
+									<label>City/Village</label>
+									<tags-input ng-model="vm.picked.cityFilter" class="widthInput"
+										placeholder="Add a city" add-from-autocomplete-only="true"
+										on-tag-added="addCity($tag)" on-tag-removed="removeCity($tag)"
+										key-property="id" display-property="name"
+										replace-spaces-with-dashes="false"> <auto-complete
+										load-on-down-arrow="true" min-length="1"
+										source="suggestCitiesWithCountries(country, $query)">
+									</auto-complete> </tags-input>
+								</div>
+
+								<div>
+									<label>Partner/Supplier</label>
+									<tags-input ng-model="vm.picked.partnerFilter"
+										ng-keyup="search()" class="widthInput"
+										placeholder="Partner/Supplier"
+										add-from-autocomplete-only="true"
+										on-tag-added="addPartner($tag)"
+										on-tag-removed="removePartner($tag)" key-property="id"
+										display-property="name" replace-spaces-with-dashes="false">
+									<auto-complete load-on-down-arrow="true" min-length="1"
+										source="suggestPartner($query)" loadOnEmpty="true">
+									</auto-complete> </tags-input>
+								</div>
+
+								<div>
+									<label>Sales Partner</label>
+									<tags-input ng-model="vm.picked.salesPartnerFilter"
+										ng-keyup="search()" class="widthInput"
+										placeholder="Sales Partner" add-from-autocomplete-only="true"
+										on-tag-added="addSalesPartner($tag)"
+										on-tag-removed="removeSalesPartner($tag)" key-property="id"
+										display-property="name" replace-spaces-with-dashes="false">
+									<auto-complete load-on-down-arrow="true" min-length="1"
+										source="suggestPartner($query)" loadOnEmpty="true">
+									</auto-complete> </tags-input>
+								</div>
+							</div>
+							<div class="pure-u-1-2 marginLeftForDiv12">
+								<div class="pure-u-3-4">
+									<div>
+										<label>Category</label>
+										<tags-input ng-model="vm.picked.categoryFilter"
+											ng-keyup="search()" class="widthInput" placeholder="Category"
+											add-from-autocomplete-only="true"
+											on-tag-added="addCategory($tag)"
+											on-tag-removed="removeCategory($tag)" key-property="id"
+											display-property="name" replace-spaces-with-dashes="false">
+										<auto-complete load-on-down-arrow="true" min-length="1"
+											source="suggestCategory($query)" loadOnEmpty="true">
+										</auto-complete> </tags-input>
+									</div>
+
+									<div>
+										<label class="fontSixeForTax" for="tax">Tax</label> <input
+											class="widthInput" ng-keyup="search()"
+											ng-model="vm.picked.taxFilter" id="tax" type="text"
+											placeholder="Tax">
+									</div>
+
+									<br>
+									<div class="marginTopForDivProfit">
+										<div>
+											<input type="checkbox" ng-model="vm.picked.amount.active"
+												ng-click="search()"> <span
+												class="marginForLabelCheckbox" ng-keyup="search()">
+												On Profit Amount </span>
+										</div>
+										<div>
+											<input type="checkbox" ng-model="vm.picked.amount.closed"
+												ng-click="search()"> <span
+												class="marginForLabelCheckbox"> On Total Amount </span>
+										</div>
+									</div>
+									<div class="marginForButton">
+										<button class="pure-button" ng-click="search()">
+											<i class="fa fa-search" aria-hidden="true"></i> Search
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<hr class="line">
+					<div>
+						<table class="pure-table pure-table-striped">
+							<thead>
+								<th>Flexi ID</th>
+								<th>Country</th>
+								<th>Company</th>
+								<th>Services</th>
+								<th>Tax %</th>
+								<th>From Profit Amount</th>
+								<th>On Total Amount</th>
+								<th>Active</th>
+								<th>Closed</th>
+								<th>Delete</th>
+								<th>Edit</th>
+							</thead>
+							<tr ng-repeat="j in vm.list">
+								<td>{{j.id}}</td>
+								<td>{{j.countryName}}</td>
+								<td>{{j.company.name}}</td>
+								<td><div ng-repeat="sr in j.service ">
+										{{sr.service.fullName}}</div></td>
+								<td>{{j.tax}}</td>
+								<td align="center">
+									<div class="status-1" ng-show="j.amount=='TRUE'"></div>
+									<div class="status-0" ng-show="j.amount!='TRUE'"></div>
+								</td>
+								<td align="center">
+									<div class="status-3" ng-show="j.amount=='FALSE'"></div>
+									<div class="status-0" ng-show="j.amount!='FALSE'"></div>
+								</td>
+								<td style="width: 50px;" align="center">
+									<div class="status-1" ng-show="j.status=='ACTIVE'"></div>
+									<div class="status-0" ng-show="j.status!=='ACTIVE'"></div>
+								</td>
+								<td style="width: 50px;" align="center">
+									<div class="status-3" ng-show="j.status=='CLOSED'"></div>
+									<div class="status-0" ng-show="j.status!='CLOSED'"></div>
+								</td>
+								<td class="heads"><i class="fa fa-trash fa-2x"
+									aria-hidden="true" ng-click="deleteSetting(j.id)"></i></td>
+								<td class="heads"><i class="fa fa-pencil-square-o fa-2x"
+									aria-hidden="true" ng-click="editSettings(j.id)"></i></td>
+							</tr>
+						</table>
+						<ul ng-cloak class="pure-paginator paginator">
+							<li><a ng-enabled="vm.totalPages > 0"
+								class="pure-button prev" ng-click="previous($index)"
+								ng-disabled="vm.searchData.currentPage == 1">&#171;</a></li>
+
+							<li ng-repeat="page in pages()"><a
+								ng-enabled="vm.totalPages > 0" class="pure-button"
+								ng-click="goToPage(page,$index)"
+								ng-class="{'pure-button-active': page == vm.searchData.currentPage}">{{page}}</a></li>
+
+							<li><a ng-enabled="vm.searchData.totalPages > 0"
+								ng-disabled="vm.searchData.currentPage == vm.totalPages"
+								class="pure-button next" ng-click="next($index)">&#187;</a></li>
+						</ul>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+
+	<form ng-cloak name="CreateForm" novalidate>
+		<div class="new-form" ng-if="vm.showCreateForm">
+		
+				<div class="pure-form widthForPureForm">
+					<div class="new-form-heading ">
+						<div class="marginForNameForm">
+							<span>{{FormName}}</span>
+						</div>
+						<div class="pure-rules-button" ng-click="closeForm()">
+							<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i>
+						</div>
+					</div>
+
+					<form class="pure-form pure-form-stacked">
+						<h4 ng-hide="vm.settingForm.id==null">ID:
+							{{vm.settingForm.id}}</h4>
+						<fieldset class="margiForFieldset">
+							<div class="pure-u-1-1 paddingForForm">
+								<div class="pure-u-7-8">
+									<div class="pure-u-1-2 marginTop_10px">
+
+										<div class="pure-u-1-2">
+											<div>Country</div>
+											<div class="marginTopForDivTags">City/Village</div>
+											<div class="marginTopForDivTags">
+												<span class="required">Partner/Supplier</span>
+											</div>
+											<div class="marginTopForDivTags">
+												<span class="required">Sales Partner</span>
+											</div>
+										</div>
+										<div class="pure-u-1-2 marginLeftForDivTags">
+											<div>
+												<tags-input ng-model="vm.editData.countries"
+													ng-disabled="vm.disabledCountry" class="widthInput"
+													placeholder="Add a country"
+													add-from-autocomplete-only="true"
+													on-tag-added="addCountryEdit($tag)"
+													on-tag-removed="removeCountryEdit($tag)" key-property="id"
+													display-property="name" replace-spaces-with-dashes="false">
+												<auto-complete load-on-down-arrow="true" min-length="1"
+													source="suggestCountryNames2($query)"> </auto-complete> </tags-input>
+												<div class="forEditI" ng-if="vm.showEditIcon">
+													<i class="fa fa-pencil-square-o fa-2x"
+														ng-click="disabledCountry()" aria-hidden="true"></i>
+												</div>
+											</div>
+
+											<div class="marginTopForDiv5px">
+												<tags-input ng-model="vm.editData.cities" class="widthInput"
+													ng-disabled="vm.disabledCity" placeholder="Add a city"
+													add-from-autocomplete-only="true"
+													on-tag-added="addCityEdit($tag)"
+													on-tag-removed="removeCityEdit($tag)" key-property="id"
+													display-property="name" replace-spaces-with-dashes="false">
+												<auto-complete load-on-down-arrow="true" min-length="1"
+													source="suggestCitiesWithCountries2(country, $query)">
+												</auto-complete> </tags-input>
+												<div class="forEditI" ng-if="vm.showEditIcon">
+													<i class="fa fa-pencil-square-o fa-2x"
+														ng-click="disabledCity()" aria-hidden="true"></i>
+												</div>
+											</div>
+
+											<div class="marginTopForDiv5px">
+												<tags-input ng-model="vm.editData.partners"
+													class="widthInput" placeholder="Partner/Supplier"
+													ng-disabled="vm.disabledPartner"
+													add-from-autocomplete-only="true"
+													on-tag-added="addPartnerEdit($tag)"
+													on-tag-removed="removePartnerEdit($tag)" key-property="id"
+													display-property="name" replace-spaces-with-dashes="false">
+												<auto-complete load-on-down-arrow="true" min-length="1"
+													source="suggestPartner($query)"> </auto-complete> </tags-input>
+												<div class="forEditI" ng-if="vm.showEditIcon">
+													<i class="fa fa-pencil-square-o fa-2x"
+														ng-click="disabledPartner()" aria-hidden="true"></i>
+												</div>
+											</div>
+
+											<div class="marginTopForDiv5px">
+												<tags-input ng-model="vm.editData.salesPartners"
+													ng-disabled="vm.disabledSalesPartner" class="widthInput"
+													placeholder="Sales Partner"
+													add-from-autocomplete-only="true"
+													on-tag-added="addSalesPartnerEdit($tag)"
+													on-tag-removed="removeSalesPartnerEdit($tag)"
+													key-property="id" display-property="name"
+													replace-spaces-with-dashes="false"> <auto-complete
+													load-on-down-arrow="true" min-length="1"
+													source="suggestPartner($query)"> </auto-complete> </tags-input>
+												<div class="forEditI" ng-if="vm.showEditIcon">
+													<i class="fa fa-pencil-square-o fa-2x"
+														ng-click="disabledSalesPartner()" aria-hidden="true"></i>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="pure-u-1-2 marginLeftForDiv12Create">
+										<div class="pure-u-1-2 widthPure12">
+											<div class="marginForServicesAndTax">
+												<span class="required">Services</span>
+											</div>
+											<div class="marginTopForDivTags">
+												<label
+													class="fontSixeForTax marginForServicesAndTax required"
+													for="tax2"> <span class="required">Tax</span></label>
+											</div>
+										</div>
+										<div class="pure-u-1-2 marginForServicesTags">
+											<div>
+												<tags-input ng-model="vm.editData.services"
+													class="propertiesForTags" ng-disabled="vm.disabledService"
+													class="widthForServices" placeholder="Services"
+													add-from-autocomplete-only="true"
+													on-tag-added="addServiceEdit($tag)"
+													on-tag-removed="removeServiceEdit($tag)" key-property="id"
+													display-property="name" replace-spaces-with-dashes="false"
+													required> <auto-complete
+													load-on-down-arrow="true" min-length="1"
+													source="suggestServiceEdit($query)"> </auto-complete> </tags-input>
+												<div class="forEditI3" ng-if="vm.showEditIcon">
+													<i class="fa fa-pencil-square-o fa-2x"
+														ng-click="disabledService()" aria-hidden="true"></i>
+												</div>
+											</div>
+											<div class="marginTopForDiv5px">
+												<input class="widthForInput propertiesForTags" id="tax2"
+													type="text" ng-disabled="vm.disabledTax" placeholder="Tax"
+													ng-model="vm.settingForm.tax" ng-required = "true">
+												<div class="forEditI2" ng-if="vm.showEditIcon">
+													<i class="fa fa-pencil-square-o fa-2x"
+														ng-click="disabledTax()" aria-hidden="true"></i>
+												</div>
+											</div>
+										</div>
+
+
+										<br>
+										<div class="marginTopForDivProfit">
+											<div class="marginForServicesAndTax">
+												<input type="radio" name="stat1"
+													class="marginForLabelCheckbox marginForServicesTags"
+													ng-value="'TRUE'" ng-model="vm.settingForm.amount" required>
+												<span class="required"> On Profit Amount </span>
+											</div>
+											<div class="marginForServicesAndTax">
+												<input type="radio" name="stat1"
+													class="marginForLabelCheckbox" ng-value="'FALSE'"
+													ng-model="vm.settingForm.amount" required> <span
+													class="required"> On Total Amount </span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<br>
+
+							<div class="pure-u-1-1 marginTopForTwoForm">
+								<div class="pure-u-1-2">
+									<label>ACTIVE</label> <input type="radio" name="stat"
+										ng-value="'ACTIVE'" ng-model="vm.settingForm.status" checked>
+									<label>CLOSED</label> <input type="radio" name="stat"
+										ng-value="'CLOSED'" ng-model="vm.settingForm.status">
+								</div>
+
+								<div class="pure-u-1-2 marginForButtonSave">
+									<button class="pure-button" ng-click="saveData()">
+										<i class="fa fa-plus"></i> Save
+									</button>
+								</div>
+							</div>
+
+						</fieldset>
+					</form>
+				</div>
+			
+		</div>
+	</form>
+
+
+	<script type='text/javascript'
+		src='/resources/bower_components/angular/angular.min.js'></script>
+	<script type='text/javascript'
+		src='/resources/bower_components/angular-route/angular-route.min.js'></script>
+	<script type='text/javascript'
+		src='/resources/bower_components/angular-resource/angular-resource.min.js'></script>
+	<script type='text/javascript'
+		src='/resources/bower_components/angular-messages/angular-messages.min.js'></script>
+	<script type='text/javascript'
+		src='/resources/bower_components/spring-security-csrf-token-interceptor-extended/dist/spring-security-csrf-token-interceptor-extended.min.js'></script>
+	<script type='text/javascript'
+		src='/resources/bower_components/ng-tags-input/ng-tags-input.min.js'></script>
+	<script type='text/javascript'
+		src='/resources/bower_components/lodash/lodash-2.4.1/dist/lodash.min.js'></script>
+
+	<script
+		src="/resources/bower_components/ng-file-upload/ng-file-upload-shim.min.js"></script>
+	<script
+		src="/resources/bower_components/ng-file-upload/ng-file-upload.min.js"></script>
+	<script
+		src="/resources/bower_components/stomp-websocket/lib/stomp.min.js"></script>
+	<script src="/resources/bower_components/sockjs/sockjs.min.js"></script>
+	<script
+		src="/resources/bower_components/angularjs-datetime-picker/angularjs-datetime-picker.js"></script>
+	<script src="/resources/bower_components/jquery/jquery.min.js"></script>
+	<script src="/resources/bower_components/jquery-ui/jquery-ui.min.js"></script>
+
+	<script type="text/javascript" src="js/admin.js"></script>
+	<script type="text/javascript" src="../include/js/admin.js"></script>
+	<script type="text/javascript" src="js/frontend-services.js"></script>
+	<script type="text/javascript" src="../include/js/frontend-services.js"></script>
+</body>
+</html>

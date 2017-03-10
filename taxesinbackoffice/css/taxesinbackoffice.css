@@ -1,0 +1,205 @@
+.widthForm {
+	width: 1000px;
+}
+
+.marginTop10px {
+	margin-top: 10px;
+}
+
+.marginLeftForDiv12 {
+	margin-left: -100px;
+}
+
+.marginLeftForDiv12Create {
+	margin-left: -20px;
+	margin-top: -10px;
+}
+
+.marginForLabelCheckbox {
+	margin-top: -15px;
+}
+
+.margiForFieldset {
+	margin-top: 20px !important;
+}
+
+.marginForSearchButton {
+	margin-left: -80px;
+	margin-top: 150px;
+}
+
+.marginTopForDivProfit {
+	margin-top: 40px;
+}
+
+.line {
+	width: 900px;
+	float: left;
+	border-bottom: 2px solid black;
+}
+
+.new-form {
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(10, 10, 10, .1) !important;
+	z-index: 2;
+}
+
+.marginForLeft {
+	margin-left: 10px;
+}
+
+.new-form h4 {
+	margin-left: 2%;
+	margin-bottom: 2px;
+	text-align: left;
+	margin-bottom: 2%;
+}
+
+.pure-skin-theme .pure-rules-button {
+	font-size: 110%;
+	margin: 5px;
+	margin-top: -20px;
+	float: right;
+}
+
+.widthForPureForm {
+	width: 800px !important;
+}
+
+.widthPure12 {
+	width: 300px;
+}
+
+.propertiesForTags {
+	margin-left: -60px !important;
+	width: 220px !important;
+}
+
+.new-form-heading {
+	margin-bottom: 3%;
+	background: #88539C;
+	height: 35px;
+	padding-top: 5px;
+	border-radius: 10px 10px 0 0;
+	color: #fff;
+	font-weight: bold;
+}
+
+.new-form>div {
+	box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.8);
+	border-radius: 10px 10px 0 0;
+	margin: 0 auto;
+	z-index: 2000;
+	opacity: 1;
+	position: fixed;
+	top: 30%;
+	left: 30%;
+	transition-delay: 0s;
+	background: #f4eff5;
+	text-align: left;
+	width: 700px;
+	height: auto;
+}
+
+.marginForButton {
+	margin-left: 400px;
+	margin-bottom: 10px;
+}
+
+.marginForNameForm {
+	margin-left: 340px;
+	margin-top: 7px;
+}
+
+.paddingForForm {
+	padding-left: 10px;
+	width: 1000px !important;
+}
+
+.marginForDivCreateForm tags-input {
+	float: right;
+	margin-right: 90px !important;
+	width: 160px;
+}
+
+.marginTopForCountry {
+	margin-top: -10px !important;
+}
+
+.marginTopForDivTax {
+	margin-top: 20px;
+}
+
+.marginForInputTaxAndCategory {
+	float: right;
+	margin-right: 100px !important;
+}
+
+.marginForButtonSave {
+	margin-left: 700px;
+	margin-top: -20px;
+}
+
+.marginTopForTwoForm {
+	margin-top: 30px;
+	padding-left: 10px;
+}
+
+.marginForDiv78 tags-input {
+	width: 135px;
+}
+
+.marginLeftForDivTags {
+	margin-left: -120px;
+	width: 200px !important;
+}
+
+.marginTopForDivTags {
+	margin-top: 20px;
+}
+
+.marginForServicesTags {
+	margin-left: -150px;
+}
+
+.widthForServices {
+	width: 168px !important;
+}
+
+.marginForServicesAndTax {
+	margin-left: 20px !important;
+}
+
+.marginTop_10px {
+	margin-top: -10px;
+}
+
+.fontSixeForTax {
+	font-size: 13px !important;
+}
+
+.forEditI {
+	margin-left: 280px;
+	margin-top: -30px;
+}
+
+.forEditI2 {
+	margin-left: 170px;
+	margin-top: -25px;
+}
+
+.forEditI3 {
+	margin-left: 170px;
+	margin-top: -30px;
+}
+
+.widthInput {
+	width: 275px !important;
+}
+
+.marginTopForDiv5px {
+	margin-top: 5px;
+}
