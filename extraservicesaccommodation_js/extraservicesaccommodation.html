@@ -1,0 +1,481 @@
+
+<body class="pure-skin-theme zoom" ng-app="adminApp"
+	ng-controller="ExtraServicesAccomodationCtrl">
+	<div class="company-list-filters">
+		<form class="pure-form pure-form-stacked">
+
+			<fieldset>
+				<legend>Extra Charges</legend>
+				<div class="pure-u-lg-1-6">
+
+					<button class="pure-button create-extra-button"
+						ng-click="createExtraCharges()">
+						<i class="fa fa-plus"></i> Create
+					</button>
+				</div>
+				<div class="pure-g" class="extra-filters">
+					<div class="pure-u-1-2">
+						<label>ID-Code<input type="text" name="idCode"
+							class="pure-u-1-2" ng-model="idCodeFilter" ng-keyup="search()">
+						</label> <label> Country <br> <tags-input class="pure-u-1-2"
+								ng-model="vm.picked.countryFilter" placeholder="Add a country"
+								add-from-autocomplete-only="true"
+								on-tag-added="addCountry($tag)"
+								on-tag-removed="removeCountry($tag)" key-property="id"
+								display-property="name" replace-spaces-with-dashes="false">
+							<auto-complete load-on-down-arrow="true"
+								source="suggestCountryNames($query)"> </auto-complete> </tags-input>
+						</label> <label> City/Village <br> <tags-input
+								class="pure-u-1-2" ng-model="vm.picked.cityFilter"
+								placeholder="Add a city" add-from-autocomplete-only="true"
+								on-tag-added="addCity($tag)" on-tag-removed="removeCity($tag)"
+								key-property="id" display-property="name"
+								replace-spaces-with-dashes="false"> <auto-complete
+								load-on-down-arrow="true"
+								source="suggestCitiesWithCountries(country, $query)">
+							</auto-complete> </tags-input>
+						</label>
+					</div>
+
+					<div class="pure-u-1-2" class="marginLeft">
+						<label>Accommodation Name <input class="pure-u-1-2"
+							type="text" name="idCode" ng-model="accommodationNameFilter"
+							ng-keyup="search()">
+						</label> <label>Partner/Supplier <input class="pure-u-1-2"
+							type="text" name="partner" ng-model="partnerFilter"
+							ng-keyup="search()">
+						</label> <label>Sales Partner<input class="pure-u-1-2" type="text"
+							name="salesPartner" ng-model="salesPartnerFilter"
+							ng-keyup="search()">
+						</label>
+					</div>
+				</div>
+			</fieldset>
+	</div>
+
+
+	<div class="pure-form">
+		<div class="pure-u-1-1">
+			<div class="pure-u-1-2">
+				<div class="marginBottom">Period Reservation Made</div>
+
+				<div>
+					<label>From:</label>
+				</div>
+				<input class="ReservationTimePicker" type="text"
+					id="reservation-made-from" class="balance-date"
+					ng-model="reservationDateMadeFromFilter" datetime-picker
+					date-format="yyyy-MM-dd" date-only /> <label
+					for="reservation-made-from"
+					style="float: left; margin: 0% 8% 0% 1%;"><i
+					class="fa fa-calendar fa-2x" aria-hidden="true"></i></label>
+
+				<div class="marginForData">
+					<label>Till:</label>
+				</div>
+				<input class="ReservationTimePicker widthForInputCalendar" type="text"
+					id="reservation-made-till" class="balance-date"
+					ng-model="reservationDateMadeTillFilter" datetime-picker
+					date-format="yyyy-MM-dd" date-only /> <label
+					for="reservation-made-till" style="float: left; margin-left: 1%;"><i
+					class="fa fa-calendar fa-2x" aria-hidden="true"></i></label>
+			</div>
+		</div>
+		<br> <br>
+		<div class="pure-u-1-1">
+			<div class="pure-u-1-2">
+				<div class="marginBottom">Period for Reserved Item</div>
+
+				<div>
+					<label>From:</label>
+				</div>
+				<input class="ReservationTimePicker" type="text"
+					id="reservation-item-from" ng-model="reservationDateItemFromFilter"
+					datetime-picker date-format="yyyy-MM-dd" date-only /> <label
+					for="reservation-item-from"
+					style="float: left; margin: 0% 8% 0% 1%;"><i
+					class="fa fa-calendar fa-2x" aria-hidden="true"
+					ng-keyup="loadData()"></i></label>
+
+				<div class="marginForData">
+					<label>Till:</label>
+				</div>
+				<input class="ReservationTimePicker" id="reservation-item-till"
+					type="text" ng-model="reservationDateItemTillFilter"
+					datetime-picker date-format="yyyy-MM-dd" date-only /> <label
+					for="reservation-item-till" style="float: left; margin-left: 1%;"><i
+					class="fa fa-calendar fa-2x" aria-hidden="true"
+					ng-keyup="loadData()"></i></label>
+			</div>
+		</div>
+	</div>
+
+	<br>
+	<div class="SearchButton">
+		<button class="pure-button" ng-click="search()">
+			<i class="fa fa-search" aria-hidden="true"></i> Search
+		</button>
+	</div>
+
+	<br>
+	<br>
+
+	</form>
+	</div>
+
+	<div>
+		<table class="pure-table pure-table-striped">
+
+			<thead>
+				<th>Id</th>
+				<th>Country Id</th>
+				<th>Country Name</th>
+				<th>City Id</th>
+				<th>City Name</th>
+				<th>Accommodation Name</th>
+				<th>Partner</th>
+				<th>Sales Partner</th>
+				<th>Country Ind.</th>
+				<th>Nationality</th>
+				<th>B2c</th>
+				<th>Basic Room</th>
+				<th>Extra Service</th>
+				<th>Price</th>
+				<th>Currency</th>
+				<th>Period Made From</th>
+				<th>Period Made Till</th>
+				<th>Period Item From</th>
+				<th>Period Item Till</th>
+				<th>Min Nights</th>
+				<th>Max Nights</th>
+				<th>Arr D.</th>
+				<th>Stay</th>
+				<th>Payment Days</th>
+				<th>Per Person</th>
+				<th>Infant</th>
+				<th>Child</th>
+				<th>Perroom</th>
+				<th>Payable Hotel</th>
+				<th>First Payment</th>
+				<th>Per Day</th>
+				<th>Obligated Pay</th>
+				<th>Age From</th>
+				<th>Age Till</th>
+				<th>Status Active</th>
+				<th>Status Close</th>
+				<th>Edit</th>
+				<th>Delete</th>
+			</thead>
+
+			<tr ng-repeat="j in vm.list">
+				<td>{{j.id}}</td>
+				<td>{{j.countryId}}</td>
+				<td>{{j.countryName}}</td>
+				<td>{{j.cityId}}</td>
+				<td>{{j.cityName}}</td>
+				<td>{{j.accommodationName}}</td>
+				<td>{{j.partner.id}}</td>
+				<td>{{j.salesPartner}}</td>
+				<td>{{j.countryInd}}</td>
+				<td>{{j.nationality}}</td>
+				<td>{{j.b2c}}</td>
+				<td>{{j.basicroom.id}}</td>
+				<td>{{j.extraservice}}</td>
+				<td>{{j.price}}</td>
+				<td>{{j.currency.id}}</td>
+				<td>{{j.periodMadeFrom}}</td>
+				<td>{{j.periodMadeTill}}</td>
+				<td>{{j.periodItemFrom}}</td>
+				<td>{{j.periodItemTill}}</td>
+				<td>{{j.minNights}}</td>
+				<td>{{j.maxNights}}</td>
+				<td style="width: 50px;" align="center">
+					<div class="status-1" ng-show="j.arrd==true"></div>
+					<div class="status-0" ng-show="j.arrd!=true"></div>
+				</td>
+				<td style="width: 50px;" align="center">
+					<div class="status-1" ng-show="j.stay==true"></div>
+					<div class="status-0" ng-show="j.stay!=true"></div>
+				</td>
+				<td>{{j.paymentdays}}</td>
+				<td style="width: 50px;" align="center">
+					<div class="status-1" ng-show="j.perPerson==true"></div>
+					<div class="status-0" ng-show="j.perPerson!=true"></div>
+				</td>
+				<td style="width: 50px;" align="center">
+					<div class="status-1" ng-show="j.infant==true"></div>
+					<div class="status-0" ng-show="j.infant!=true"></div>
+				</td>
+				<td style="width: 50px;" align="center">
+					<div class="status-1" ng-show="j.child==true"></div>
+					<div class="status-0" ng-show="j.child!=true"></div>
+				</td>
+				<td style="width: 50px;" align="center">
+					<div class="status-1" ng-show="j.perRoom==true"></div>
+					<div class="status-0" ng-show="j.perRoom!=true"></div>
+				</td>
+				<td style="width: 50px;" align="center">
+					<div class="status-1" ng-show="j.payAbleHotel==true"></div>
+					<div class="status-0" ng-show="j.payAbleHotel!=true"></div>
+				</td>
+				<td style="width: 50px;" align="center">
+					<div class="status-1" ng-show="j.firstpayment==true"></div>
+					<div class="status-0" ng-show="j.firstpayment!=true"></div>
+				</td>
+				<td style="width: 50px;" align="center">
+					<div class="status-1" ng-show="j.perDay==true"></div>
+					<div class="status-0" ng-show="j.perDay!=true"></div>
+				</td>
+				<td style="width: 50px;" align="center">
+					<div class="status-1" ng-show="j.obligatedPay==true"></div>
+					<div class="status-0" ng-show="j.obligatedPay!=true"></div>
+				</td>
+				<td>{{j.ageFrom}}</td>
+				<td>{{j.ageTill}}</td>
+				<td style="width: 50px;" align="center">
+					<div class="status-1" ng-show="j.status=='ACTIVE'"></div>
+					<div class="status-0" ng-show="j.status!=='ACTIVE'"></div>
+				</td>
+				<td style="width: 50px;" align="center">
+					<div class="status-3" ng-show="j.status=='CLOSED'"></div>
+					<div class="status-0" ng-show="j.status!='CLOSED'"></div>
+				</td>
+
+				<td class="heads"><i class="fa fa-pencil-square-o fa-2x"
+					aria-hidden="true" ng-click="editSettings(j.id)"></i></td>
+
+				<td class="heads"><i class="fa fa-trash fa-2x"
+					aria-hidden="true" ng-click="deleteSetting(j.id)"></i></td>
+
+			</tr>
+		</table>
+		<ul ng-cloak class="pure-paginator paginator">
+			<li><a ng-enabled="vm.searchData.totalPages > 0"
+				class="pure-button prev" ng-click="previous($index)"
+				ng-disabled="vm.searchData.currentPage == 1">&#171;</a></li>
+
+			<li ng-repeat="page in pages()"><a
+				ng-enabled="vm.searchData.totalPages > 0" class="pure-button"
+				ng-click="goToPage(page,$index)"
+				ng-class="{'pure-button-active': page == vm.searchData.currentPage}">{{page}}</a></li>
+
+			<li><a ng-enabled="vm.searchData.totalPages > 0"
+				ng-disabled="vm.searchData.currentPage == vm.searchData.totalPages"
+				class="pure-button next" ng-click="next($index)">&#187;</a></li>
+		</ul>
+
+	</div>
+
+
+	<form ng-cloak name="EditForm" novalidate>
+		<div class="new-form" ng-show="vm.showSettingForm">
+			<div class="pure-form">
+				<h2 class="new-form-heading">{{vm.head}}</h2>
+				<div class="marginBlock">
+					<h4 ng-hide=" !settingForm.id ">ID: {{settingForm.id}}</h4>
+					<div class="pure-u-1-1">
+						<div class="pure-u-1-2">
+
+							<label class="font">Basic Room Type / Board </label>
+							<tags-input class="input-field inputTag"
+								ng-model="vm.picked.basicroom"
+								replace-spaces-with-dashes="false" key-property="id"
+								on-tag-added="basicroomAddForm($tag)"
+								on-tag-removed="basicroomRemovedForm()"
+								add-from-autocomplete-only="true" add-on-paste="true"
+								placeholder="Type (at 2 letters)" class="pure-input-2-3"
+								display-property="name"> <auto-complete
+								load-on-down-arrow="true" min-length="1"
+								source="suggestBasicRoom($query)" loadOnEmpty="true">
+							</auto-complete> </tags-input>
+
+						</div>
+
+						<div class="pure-u-1-2 extraService">
+							<label class="font" for="extraService">Extra Service </label> <input
+								class="input1" type="text" id="extraService" min="0" max="100"
+								ng-model="settingForm.extraService"
+								placeholder="Enter Extra Service"
+								replace-spaces-with-dashes="false" ng-required="true"> </input>
+						</div>
+					</div>
+
+					<div class="pure-u-1-1 marginBlock">
+
+						<div class="pure-u-1-4">
+							<label for="priceNetto">Price Netto </label> <input type="text"
+								id="priceNetto" min="0" max="100" class="input-input"
+								ng-model="settingForm.price" placeholder="Enter Price"
+								replace-spaces-with-dashes="false" ng-required="true"> </input>
+						</div>
+
+						<div class="pure-u-1-4">
+							<label for="currency">Currency</label> <select id="currency"
+								ng-model="settingForm.currencyId">
+								<option ng-repeat="currency in vm.currencies"
+									value="{{currency.id}}">{{currency.id}}</option>
+							</select>
+						</div>
+
+						<div class="pure-u-1-4 murkUpLabel">
+							<label for="murkUp">Murk Up </label> <input type="text"
+								class="widthEl" id="murkUp" min="0" max="100"
+								ng-model="settingForm.murkUp" placeholder="Enter Murk Up"
+								replace-spaces-with-dashes="false" ng-required="true"> </input>
+						</div>
+
+
+					</div>
+
+					<div class="pure-u-1-1 marginPer">
+						<div class="pure-u-1-6">
+							<input type="checkbox" ng-model="settingForm.basedPerPerson">
+							<label> Based Per Person </label>
+						</div>
+						<div class="pure-u-1-6">
+							<input type="checkbox" ng-model="settingForm.basedPerChild" /> <label>
+								Based Per Child </label>
+						</div>
+						<div class="pure-u-1-6">
+							<input type="checkbox" ng-model="settingForm.basedPerInfant" />
+							<label>Based Per Infant </label>
+						</div>
+					</div>
+
+					<div class="marginBottom">
+						<label for="ageFrom">Age From </label> <br> <input
+							type="text" id="ageFrom" min="0" max="100"
+							ng-model="settingForm.ageFrom" placeholder="Enter Age From"
+							replace-spaces-with-dashes="false" ng-required="true"> </input> <br>
+					</div>
+					<div class="marginBottom">
+						<label for="ageTill">Age Till </label> <br> <input
+							type="text" id="ageTill" min="0" max="100"
+							ng-model="settingForm.ageTill" placeholder="Enter Age Till"
+							replace-spaces-with-dashes="false" ng-required="true"> </input>
+					</div>
+					<div>
+						<input type="checkbox"
+							ng-model="settingForm.payableOfAccommodation"> <label>
+							Payable of Accommodation </label> <br> <input type="checkbox"
+							ng-model="settingForm.oneTimePaymentForWholeStay"> <label>
+							One time payment for whole stay </label> <br> <input type="checkbox"
+							ng-model="settingForm.basedPerRoomApartBungalowVilla"> <label>Based
+							Per Room Apartment Bungalow Villa </label> <br> <input
+							type="checkbox" ng-model="settingForm.perDayCharge"> <label>
+							Per Day Charge </label> <br> <input type="checkbox"
+							ng-model="settingForm.obligatedToPay"> <label>
+							Obligated to pay </label>
+					</div>
+					<br>
+
+					<div class="pure-form" style="width: 1000px">
+						<div class="pure-u-1-1">
+							<div class="marginBottom">Period when reservation needs to
+								be made</div>
+
+							<div>
+								<label>From: </label>
+							</div>
+							<input class="ReservationTimePicker" type="text"
+								id="reservation-made-from_new" class="balance-date"
+								ng-model="settingForm.reservationDateMadeFromFilterNew"
+								datetime-picker date-format="yyyy-MM-dd" date-only /> <label
+								for="reservation-made-from_new"
+								style="float: left; margin: 0% 8% 0% 1%;"><i
+								class="fa fa-calendar fa-2x" aria-hidden="true"></i></label>
+
+							<div class="marginForData">
+								<label>Till:</label>
+							</div>
+							<input class="ReservationTimePicker" type="text"
+								id="reservation-made-till_new" class="balance-date"
+								ng-model="settingForm.reservationDateMadeTillFilterNew"
+								datetime-picker date-format="yyyy-MM-dd" date-only /> <label
+								for="reservation-made-till_new"
+								style="float: left; margin-left: 1%;"><i
+								class="fa fa-calendar fa-2x" aria-hidden="true"></i></label>
+
+
+						</div>
+						<br> <br>
+						<div class="pure-u-1-1 marginBottom">
+							<div class="marginBottom">Period for reserved item</div>
+							<div>
+								<label>From:</label>
+							</div>
+							<input class="period ReservationTimePicker" type="text"
+								id="reservation-item-from_new"
+								ng-model="settingForm.reservationDateItemFromFilterNew"
+								datetime-picker date-format="yyyy-MM-dd" date-only /> <label
+								for="reservation-item-from_new"
+								style="float: left; margin: 0% 8% 0% 1%;"><i
+								class="fa fa-calendar fa-2x" aria-hidden="true"
+								ng-keyup="loadData()"></i></label>
+
+							<div class="marginForData">
+								<label>Till:</label>
+							</div>
+							<input class="period ReservationTimePicker"
+								id="reservation-item-till_new" type="text"
+								ng-model="settingForm.reservationDateItemTillFilterNew"
+								datetime-picker date-format="yyyy-MM-dd" date-only /> <label
+								for="reservation-item-till_new"
+								style="float: left; margin-left: 1%;"><i
+								class="fa fa-calendar fa-2x" aria-hidden="true"
+								ng-keyup="loadData()"></i></label>
+						</div>
+					</div>
+					<div class="marginBottom">
+						<label for="minNightsOfStay">Min Nights of Stay </label> <input
+							type="text" id="minNightsOfStay" min="0" max="100"
+							ng-model="settingForm.minNightsOfStay"
+							placeholder="Enter Min Nights of Stay"
+							replace-spaces-with-dashes="false" ng-required="true"> </input>
+					</div>
+					<div class="marginBottom">
+						<label for="maxNightsOfStay">Max Nights of Stay </label> <input
+							type="text" id="maxNightsOfStay" min="0" max="100"
+							ng-model="settingForm.maxNightsOfStay"
+							placeholder="Enter Max Nights of Stay"
+							replace-spaces-with-dashes="false" ng-required="true"> </input>
+					</div>
+
+					<div>
+						<span class="fontSize"> Payment Time Limit </span>
+					</div>
+					<br>
+					<div class="pure-u-1-1">
+						<div class="pure-u-1-3">
+							<label for="daysBeforeArrivalDate">Days before arrival
+								date: </label> <input type="text" id="daysBeforeArrivalDate" min="0"
+								max="100" ng-model="settingForm.paymentDays"
+								replace-spaces-with-dashes="false" ng-required="true"> </input>
+						</div>
+						<div class="pure-u-1-3 marginTopPayment">
+							<input type="checkbox" ng-model="settingForm.paymentUponBooking">
+							<label> 100% Payment upon booking </label>
+						</div>
+					</div>
+
+
+					<div class="add-forms2">
+						<label>ACTIVE</label> <input type="radio" name="stat"
+							ng-value="'ACTIVE'" ng-model="settingForm.status" checked>
+						<label>CLOSED</label> <input type="radio" name="stat"
+							ng-value="'CLOSED'" ng-model="settingForm.status">
+					</div>
+					<p>
+						<a href="http://www.yandex.ru">History</a>
+					</p>
+					<div class="add-forms" class="form-button-div">
+						<button class="pure-button form-button"
+							ng-click="closeSettingForm()">Close</button>
+						<button class="pure-button form-button" ng-click="saveSettings()">
+							<i class="fa fa-plus"></i> Save
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>

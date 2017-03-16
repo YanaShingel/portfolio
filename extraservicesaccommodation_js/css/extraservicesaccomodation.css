@@ -1,0 +1,737 @@
+table {
+	margin-bottom: 5px;
+}
+
+.Filter {
+	margin-bottom: 0%;
+}
+
+.filteSearch {
+	margin-left: 50%;
+}
+
+.alighForTh {
+	align: "center";
+}
+
+th {
+	text-align: center;
+}
+
+.add-button {
+	margin-bottom: 5px;
+	margin-left: 230px;
+}
+
+.pure-button {
+	widht: 50px;
+}
+
+.create-extra-button {
+	margin-bottom: 100px;
+}
+
+.company-list-filters {
+	width: 1200px;
+}
+
+.ReservationMainForm {
+	clear: both;
+	border-radius: 10px;
+}
+
+.heads {
+	text-align: center;
+	padding: 3px;
+}
+
+.new-form h4 {
+	margin-left: 2%;
+	margin-bottom: 2px;
+	text-align: left;
+	margin-bottom: 2%;
+}
+
+.period {
+	width: 250px;
+}
+
+.margin-div {
+	margin: 2%;
+}
+
+.new-form>div {
+	box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.8);
+	border-radius: 10px 10px 0 0;
+	margin: 0 auto;
+	z-index: 2000;
+	opacity: 1;
+	position: fixed;
+	left: 30%;
+	transition-delay: 0s;
+	background: #f4eff5;
+	text-align: left;
+	width: 40%;
+	height: 90%;
+}
+
+.new-form {
+	height: 85%;
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(10, 10, 10, .1) !important;
+	z-index: 2;
+}
+
+.new-form-heading {
+	margin-top: 0px;
+	background: #88539C;
+	height: 30px;
+	padding-top: 10px;
+	border-radius: 10px 10px 0 0;
+	color: #fff;
+	font-weight: bold;
+	text-align: center;
+}
+
+.forFloat {
+	float: left;
+}
+
+.add-forms {
+	float: left;
+	width: 30%;
+	margin-left: 0%;
+	margin-bottom: 2%;
+}
+
+.add-forms1 {
+	float: left;
+	width: 40%;
+	margin-left: 1%;
+	margin-bottom: 2%;
+}
+
+.add-forms2 {
+	width: 45%;
+	margin: 2% 2%;
+}
+
+.heads {
+	text-align: center;
+	padding: 3px;
+}
+
+[ng-cloak], .ng-cloak {
+	display: none;
+}
+
+.weight {
+	font-weight: 800;
+	font-size: 130%;
+}
+
+.marginBlock {
+	margin-left: 20px;
+}
+
+.input-input {
+	width: 40%;
+	margin: 3% 3% 0% 2%;
+	border: 1px solid darkgray;
+	overflow: hidden;
+	word-wrap: break-word;
+	cursor: text;
+	background-color: #fff;
+	box-shadow: 1px 1px 1px 0 lightgray inset;
+	height: 80%;
+	padding: 0.45em 0.5em 0.45em 0.5em;
+}
+
+.murkUpLabel {
+	margin-left: -30px;
+}
+
+.marginPer {
+	margin-bottom: 20px;
+	margin-top: 10px;
+}
+
+.marginBottom {
+	margin-bottom: 10px;
+}
+
+.align {
+	margin-left: 1%;
+}
+
+.create-company-button {
+	margin-bottom: 100px;
+}
+
+.left {
+	margin-left: -120px;
+}
+
+.left1 {
+	margin-left: -50px;
+}
+
+.marginTop {
+	margin-top: -7px;
+}
+
+.widthEl {
+	width: 80px;
+}
+
+.inputForCreate {
+	margin-left: -240px;
+}
+
+.widthForInput {
+	width: 400px;
+}
+
+.ageTill {
+	margin-right: 13px;
+}
+
+.input-field {
+	/*margin: 10% 10% 12% 15%;*/
+	width: 100%;
+	margin-bottom: 1%;
+	margin-right: 10%;
+}
+
+.labelTag {
+	float: left;
+	margin-right: 10px;
+	margin-top: -3%;
+}
+
+.extraService {
+	margin-left: -20px;
+	margin-top: -7px;
+}
+
+.font {
+	font-weight: 700;
+	font-size: 9pt;
+	margin-right: 10px;
+}
+
+.input1 {
+	width: 200px;
+}
+
+.inputTag {
+	width: 50%;
+	float: right;
+	margin-top: -5px;
+}
+
+.MainFilter {
+	width: 100%;
+	float: left;
+	margin-right: 2%;
+}
+
+.SearchButton {
+	margin-left: 100px;
+}
+
+.ReservationTimePicker {
+	float: left;
+	width: 20%;
+}
+
+.ReservationPeriodText {
+	float: left;
+	margin-right: 1%;
+}
+
+.Accommod {
+	margin-left: 20px
+}
+
+.ReserPerMade {
+	font-size: 50px;
+}
+
+.foripform-1-3 {
+	display: inline-block;
+}
+
+.ReservationPeriod {
+	margin-bottom: 3%;
+	float: left;
+	width: 1200px;
+}
+
+.marginLeft {
+	margin-left: -10px;
+}
+
+.extra-filters {
+	width: 300px;
+}
+
+.marginleft {
+	margin-left: 8px;
+}
+
+.marginbottom {
+	margin-bottom: 8px;
+	width: 110%;
+}
+
+.width {
+	width: 150px;
+}
+
+.width2 {
+	width: 310px;
+}
+
+.float {
+	float: left;
+}
+
+.line {
+	border: none; /* Убираем границу */
+	background-color: green; /* Цвет линии */
+	color: blue; /* Цвет линии для IE6-7 */
+	height: 2px; /* Толщина линии */
+	width: 1200px;
+}
+
+.buttomSave {
+	margin-left: 950px;
+	margin-bottom: 50px;
+}
+
+.PriceNetto {
+	width: 70px;
+}
+
+.PriceNettoLabel {
+	margin-left: -60px;
+}
+
+.widthMr {
+	width: 60px;
+	margin-right: 10px;
+}
+
+.marginrightwidth {
+	width: 315px;
+	margin-right: 10px;
+}
+
+.bootstrap .tags .tag-item {
+	background: #cdbbd3;
+	border: 1px solid #f4eff5;
+	border-radius: 4px;
+	color: #fff;
+}
+
+.bootstrap .tags.focused {
+	border-color: #cdbbd3;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px
+		rgba(102, 175, 233, 0.6);
+}
+
+.bootstrap .autocomplete .suggestion-item.selected {
+	color: #262626;
+	background-color: #cdbbd3;
+}
+
+.contentUpdate {
+	left: 360px;
+	/*overflow: auto;*/
+	position: absolute;
+	top: 30px;
+	/*width: 2600px;*/
+}
+
+.company-table-container {
+	max-height: 500px;
+	overflow: auto;
+}
+
+.create-company-button {
+	margin-bottom: 100px;
+}
+
+.marginForData {
+	margin-top: -13px;
+}
+
+.fontSize {
+	font-size: 11pt;
+}
+
+.marginTopPayment {
+	margin-top: 18px;
+}
+
+.marketing-rule-item {
+	margin: 10px 0px;
+}
+
+.marketing-rule-item .pure-button.remove-marketing-rule-item {
+	padding: 3px 7px;
+}
+
+.company-create-btn-group {
+	margin: 15px 0px;
+}
+
+.users {
+	margin: 10px 0px;
+}
+
+.save-marketing-form-btn {
+	margin: 20px 0px 35px 0px;
+}
+
+/* subcompany drag-and-drop table styles */
+.subcompany-container {
+	display: inline-block;
+	min-height: 150px;
+	border: 1px solid #eee;
+}
+
+.subcompany-container .subcompany-table td, .subcompany-container .subcompany-table thead
+	{
+	background: transparent;
+}
+
+.subcompany-container .subcompany-table th {
+	background: #cdbbd3;
+}
+
+.subcompany-container .subcompany-table tr:hover {
+	background: #e9e0eb;
+	cursor: move;
+}
+
+.subcompany-container .subcompany-table div.company {
+	overflow-x: hidden;
+	width: 95px;
+}
+
+.subcompany-container .subcompany-table div.status-company {
+	overflow-x: hidden;
+	width: 50px;
+}
+
+.subcompany-container .subcompany-table div {
+	overflow-x: hidden;
+	width: 80px;
+}
+
+.subcompany-container .subcompany-table th {
+	
+}
+
+.subcompany-table td:first-child {
+	text-decoration: underline;
+}
+
+.company-linked {
+	background-color: rgba(70, 70, 70, .2) !important;
+	cursor: default !important;
+	display: none;
+}
+
+.company-not-linked {
+	
+}
+
+.markup-links {
+	margin-top: 20px;
+}
+
+.marketing-rule-form {
+	margin-left: -320px;
+}
+
+/* add subcompany style */
+.add-subcompany {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(10, 10, 10, .15) !important;
+	z-index: 2;
+}
+
+.add-subcompany>form {
+	width: 1000px;
+	position: absolute;
+	left: 25%;
+	top: 5%;
+}
+
+.add-subcompany .add-subcompany-container fieldset {
+	padding: 0px;
+}
+
+.add-subcompany-container {
+	background: #f4eff5;
+	border-radius: 15px 15px 0px 0px;
+}
+
+.add-subcompany-container .exit-btn {
+	float: right;
+	cursor: pointer;
+}
+
+.add-subcompany .header {
+	background: #88539C;
+	border-radius: 15px 15px 0px 0px;
+	color: #fff;
+}
+
+.add-subcompany .header h3 {
+	margin: 20px 15px;
+}
+
+.add-subcompany .inner-container {
+	padding: 0px 15px;
+	max-height: 700px;
+	overflow: auto;
+}
+
+.add-subcompany .dates {
+	
+}
+
+.angularjs-datetime-picker {
+	z-index: 99999;
+}
+
+.add-subcompany-container label>i {
+	cursor: pointer;
+}
+
+.scroll {
+	width: 100%;
+	padding-bottom: 4px;
+}
+
+div .host {
+	margin-bottom: 0px;
+}
+
+.b2b2b {
+	max-height: 800px !important;
+	overflow: auto;
+}
+
+.subcompany-table {
+	min-width: 900px;
+}
+
+.subcompany-tables-width {
+	min-width: 1800px;
+}
+
+@CHARSET "UTF-8";
+
+#CONFIRMEDPAID {
+	width: 0.5em;
+	height: 0.5em;
+	background: green;
+	border: 1px solid black;
+	margin: auto 5px;
+}
+
+#CONFIRMEDPARTLY_PAID {
+	width: 0.5em;
+	height: 0.5em;
+	background: purple;
+	border: 1px solid black;
+	margin: auto 5px;
+}
+
+#CONFIRMEDNOT_PAID {
+	width: 0.5em;
+	height: 0.5em;
+	background: orange;
+	border: 1px solid black;
+	margin: auto 5px;
+}
+
+#CANCELEDPAID {
+	width: 0.5em;
+	height: 0.5em;
+	background: red;
+	border: 1px solid black;
+	margin: auto 5px;
+}
+
+#CANCELEDPARTLY_PAID {
+	width: 0.5em;
+	height: 0.5em;
+	background: pink;
+	border: 1px solid black;
+	margin: auto 5px;
+}
+
+#CANCELEDNOT_PAID {
+	width: 0.5em;
+	height: 0.5em;
+	background: grey;
+	border: 1px solid black;
+	margin: auto 5px;
+}
+
+#NEWPENDING {
+	width: 0.5em;
+	height: 0.5em;
+	background: white;
+	border: 1px solid black;
+	margin: auto 5px;
+}
+
+#SEND {
+	width: 0.5em;
+	height: 0.5em;
+	background: yellow;
+	border: 1px solid black;
+	margin: auto 5px;
+}
+
+#RECEIVE {
+	width: 0.5em;
+	height: 0.5em;
+	background: orange;
+	border: 1px solid black;
+	margin: auto 5px;
+}
+
+#EMPTY {
+	width: 0.5em;
+	height: 0.5em;
+	background: grey;
+	border: 1px solid black;
+	margin: auto 5px;
+}
+
+.yellow {
+	background: yellow !important;
+}
+
+.orange {
+	background: orange !important;
+}
+
+.red {
+	color: red !important;
+}
+
+.status {
+	clear: left;
+}
+
+.square {
+	display: inline-block;
+}
+
+.sName {
+	display: inline-block;
+	margin-left: 1% !important;
+}
+
+.sName2 {
+	display: inline-block;
+	margin-left: 16px !important;
+}
+
+.paidStatus {
+	display: inline-block;
+	margin-left: 700px !important;
+}
+
+.balance-filters {
+	width: 1400px;
+	margin-top: 50px;
+}
+
+.SearchButton {
+	margin-left: 1%;
+	clear: both;
+}
+
+.pure-custom {
+	margin-top: 20px;
+	color: #4f4f4f;
+	font-size: 90%;
+}
+
+.column {
+	width: 50px;
+}
+
+.customBalance {
+	position: absolute;
+	margin-left: 360px;
+	margin-top: -950px;
+}
+
+.th-custom {
+	text-align: center;
+}
+
+.width-column {
+	width: 100px;
+	size: 100px;
+}
+
+.inline-block {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.custom-input {
+	margin-left: 520px;
+	margin-top: 40px;
+}
+
+.input-checkbox {
+	margin-left: 30px;
+}
+
+.balance-button {
+	margin-bottom: 1%;
+}
+
+.balance-date {
+	width: 80%;
+	float: left;
+}
+
+.balance-data-container {
+	clear: both;
+	margin-bottom: 1%;
+}
+
+.balance-input {
+	float: left;
+	margin-right: 1%;
+}
+
+.pictures {
+	margin-bottom: 1%;
+}
+
+.customBalance i {
+	cursor: pointer;
+}

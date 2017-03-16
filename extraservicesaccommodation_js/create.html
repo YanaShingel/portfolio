@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Payment System</title>
+<link rel="stylesheet" type="text/css"
+	href="/resources/bower_components/pure/pure-release-0.5.0/pure.css">
+<link rel="stylesheet" type="text/css"
+	href="/resources/bower_components/pure/pure-release-0.5.0/grids-responsive.css">
+<link rel="stylesheet" type="text/css"
+	href="/resources/bower_components/ng-tags-input/ng-tags-input.css">
+<link rel="stylesheet" type="text/css"
+	href="/resources/bower_components/components-font-awesome/css/font-awesome.min.css">
+
+
+<link rel="stylesheet" type="text/css" href="../css/theme.css">
+<link rel="stylesheet" type="text/css" href="../css/style.css">
+<link rel="stylesheet"
+	href="/resources/bower_components/angularjs-datetime-picker/angularjs-datetime-picker.css" />
+<link rel="stylesheet" type="text/css"
+	href="css/extraservicesaccomodation.css">
+
+</head>
+
+<body class="pure-skin-theme zoom" ng-app="adminApp"
+	ng-controller="ExtraServicesAccomodationCtrl">
+
+	<header class="page-header pure-g">
+		<div class="pure-u-lg-1-2 pure-u-1">
+			<a class="pure-menu-heading" href="#"> </a> <span
+				class="header-element page-title"></span>
+		</div>
+		<div class="logout-link">
+			<a href="#" ng-click="logout()">Logout</a>
+		</div>
+	</header>
+
+	<menu class="pure-u-lg-1-8 pure-u-1">
+		<div ng-include="'/resources/admin/include/menu.html'"></div>
+	</menu>
+	<div class="all-data-content top-panel">
+		<div class="content pure-u-1 pure-u-md-3-4">
+			<main class="container not-ready"
+				ng-class="{'app-ready': info.appReady}" ng-cloak>
+			<div class="company-list-filters">
+				<div class="pure-u-l">
+					<button ng-click="back()" class="pure-button">Back</button>
+				</div>
+
+				<form class="pure-form" style="width: 1200px" autocomplete="off"
+					novalidate>
+					<div class="pure-u-1-1">
+						<fieldset ng-disabled="disabledForm">
+							<legend>Extra Charges</legend>
+							<div>
+								<div class="pure-u-1-3">
+									<label><span class="required">Country</span></label>
+									<tags-input class="input-field"
+										ng-model="vm.picked.countryFilter" key-property="id"
+										add-from-autocomplete-only="true" add-on-paste="true"
+										on-tag-added="addCountry($tag)"
+										on-tag-removed="removeCountry($tag)"
+										replace-spaces-with-dashes="false" placeholder="Country"
+										ng-disabled="disabledForm" display-property="name" required>
+									<auto-complete min-length="1"
+										source="suggestCountryNames($query)" loadOnEmpty="true"></auto-complete>
+									</tags-input>
+								</div>
+								<div class="pure-u-1-3"></div>
+
+								<div class="pure-u-1-3 inputForCreate">
+									<label><span class="required">City / Village </span></label>
+									<tags-input class="input-field" ng-model="vm.picked.cityFilter"
+										key-property="id" ng-disabled="disabledForm"
+										add-from-autocomplete-only="true" add-on-paste="true"
+										on-tag-added="addCity($tag)" on-tag-removed="removeCity($tag)"
+										replace-spaces-with-dashes="false"
+										placeholder="City / Village" display-property="name" required>
+									<auto-complete min-length="1"
+										source="suggestCitiesWithCountries(country, $query)"
+										loadOnEmpty="true"></auto-complete> </tags-input>
+								</div>
+
+								<div class="pure-u-1-3">
+									<label for="accommodationName">Accommodation Name </label> <br>
+									<input class="widthForInput" id="accommodationName" type="text"
+										name="accommodationName"
+										ng-model="vm.newData.accommodationName">
+								</div>
+								<div class="pure-u-1-3"></div>
+
+								<div class="pure-u-1-3 inputForCreate">
+									<label><span>Partner/Supplier </span></label>
+									<tags-input class="input-field"
+										ng-model="vm.picked.partnerFilter" key-property="id"
+										ng-disabled="disabledForm" add-from-autocomplete-only="true"
+										add-on-paste="true" on-tag-added="addPartner($tag)"
+										on-tag-removed="removePartner($tag)"
+										replace-spaces-with-dashes="false"
+										placeholder="Partner/Supplier" display-property="id" required>
+									<auto-complete min-length="1" source="suggestPartner($query)"
+										loadOnEmpty="true"></auto-complete> </tags-input>
+								</div>
+
+								<div class="pure-u-1-3">
+									<label for="partner">Sales Partner</label> <br> <input
+										class="widthForInput" id="salesPartner" type="text"
+										name="salesPartner" ng-model="vm.newData.salesPartner">
+								</div>
+
+								<div class="pure-u-1-3"></div>
+
+								<div class="pure-u-1-3 inputForCreate">
+									<label><span>Country for Sales</span></label>
+									<tags-input class="input-field"
+										ng-model="vm.picked.countrySales" key-property="id"
+										add-from-autocomplete-only="true" add-on-paste="true"
+										on-tag-added="addCountry($tag)"
+										on-tag-removed="removeCountryMapping($tag)"
+										replace-spaces-with-dashes="false" placeholder="Country"
+										ng-disabled="disabledForm" display-property="name" required>
+									<auto-complete min-length="3"
+										source="suggestCountryNames($query)" loadOnEmpty="true"></auto-complete>
+									</tags-input>
+								</div>
+
+								<div class="pure-u-1-3">
+									<label for="indicateNat">Indicate Nationalities</label> <input
+										class="widthForInput" id="indicateNat" class="pure-u-23-24"
+										type="text" name="indicateNationality"
+										ng-model="vm.newData.indicateNationalities">
+								</div>
+								<div class="pure-u-1-3"></div>
+
+								<div class="pure-u-1-3 inputForCreate">
+									<label for="b2cWeb">B2C WebSite</label> <br> <input
+										class="widthForInput" id="b2cWeb" class="pure-u-1-3"
+										type="text" name="webSite" ng-model="vm.newData.b2cWebSite">
+								</div>
+
+							</div>
+						</fieldset>
+
+
+						<div ng-repeat="s in extraCharges.settingForm" class="pure-u-1-1">
+							<p class="line"></p>
+							<div style="width: 1200px">
+								<div class="pure-u-1-3">
+									<label class="font">Basic Room Type / Board </label>
+									<tags-input class="input-field inputTag"
+										ng-model="settingForm[$index].basicroom"
+										replace-spaces-with-dashes="false" key-property="id"
+										on-tag-added="addBasicRoomForSave($tag, $index)"
+										on-tag-removed="removeBasicRoomForSave($index)"
+										add-from-autocomplete-only="true" add-on-paste="true"
+										placeholder="Type (at 2 letters)" class="pure-input-2-3"
+										display-property="name"> <auto-complete
+										load-on-down-arrow="true" min-length="1"
+										source="suggestBasicRoom($query)" loadOnEmpty="true">
+									</auto-complete> </tags-input>
+								</div>
+								<div class="pure-u-1-3 extraService">
+									<label class="font" for="extraService">Extra Service </label> <input
+										class="input1" type="text" id="extraService" min="0" max="100"
+										ng-model="extraCharges.settingForm[$index].extraservice"
+										placeholder="Enter Extra Service"
+										replace-spaces-with-dashes="false" ng-required="true">
+									</input>
+								</div>
+								<div class="pure-u-1-3 marginTop">
+									<div class="pure-u-1-3 left">
+										<label for="priceNetto">Price Netto </label> <input
+											type="text" id="priceNetto" min="0" max="100"
+											class="input-input PriceNetto"
+											ng-model="extraCharges.settingForm[$index].price"
+											placeholder="Enter Price" replace-spaces-with-dashes="false"
+											ng-required="true"> </input>
+									</div>
+									<div class="pure-u-1-3">
+										<label for="currency">Currency</label> <select id="currency"
+											ng-model="extraCharges.settingForm[$index].currencyId">
+											<option ng-repeat="currency in vm.currencies"
+												value="{{currency.id}}">{{currency.id}}</option>
+										</select>
+									</div>
+									<div class="pure-u-1-3">
+										<label for="murkUp">Murk Up </label> <input type="text"
+											class="widthEl" id="murkUp" min="0" max="100"
+											ng-model="settingForm.murkUp" placeholder="Enter Murk Up"
+											replace-spaces-with-dashes="false" ng-required="true">
+										</input>
+									</div>
+
+								</div>
+								<br>
+
+								<div class="pure-u-1-1 marginPer">
+									<div class="pure-u-1-8">
+										<input type="checkbox"
+											ng-model="extraCharges.settingForm[$index].basedPerPerson">
+										<label> Based Per Person </label>
+									</div>
+									<div class="pure-u-1-8">
+										<input type="checkbox"
+											ng-model="extraCharges.settingForm[$index].basedPerChild" /><label>Based
+											Per Child </label>
+									</div>
+									<div class="pure-u-1-8">
+										<input type="checkbox"
+											ng-model="extraCharges.settingForm[$index].basedPerInfant" />
+										<label>Based Per Infant </label>
+									</div>
+								</div>
+
+								<div class="marginBottom">
+									<label for="ageFrom">Age From </label> <input type="text"
+										id="ageFrom" min="0" max="100"
+										ng-model="extraCharges.settingForm[$index].ageFrom"
+										placeholder="Enter Age From"
+										replace-spaces-with-dashes="false" ng-required="true">
+									</input>
+								</div>
+								<div class="marginBottom">
+									<label for="ageTill" class="ageTill">Age Till </label> <input
+										type="text" id="ageTill" min="0" max="100"
+										ng-model="extraCharges.settingForm[$index].ageTill"
+										placeholder="Enter Age Till"
+										replace-spaces-with-dashes="false" ng-required="true">
+									</input>
+								</div>
+								<div>
+									<input type="checkbox"
+										ng-model="extraCharges.settingForm[$index].payableOfAccommodation">
+									<label> Payable of Accommodation </label> <br> <input
+										type="checkbox"
+										ng-model="extraCharges.settingForm[$index].oneTimePaymentForWholeStay">
+									<label> One time payment for whole stay </label> <br> <input
+										type="checkbox"
+										ng-model="extraCharges.settingForm[$index].basedPerRoomApartBungalowVilla">
+									<label>Based Per Room Apartment Bungalow Villa </label> <br>
+									<input type="checkbox"
+										ng-model="extraCharges.settingForm[$index].perDayCharge">
+									<label> Per Day Charge </label> <br> <input
+										type="checkbox"
+										ng-model="extraCharges.settingForm[$index].obligatedToPay">
+									<label> Obligated to pay </label>
+								</div>
+								<br>
+								<div class="pure-form">
+									<div class="pure-u-1-1">
+										<div class="marginBottom">Period when reservation needs
+											to be made</div>
+
+										<div>
+											<label>From: </label>
+										</div>
+										<input class="ReservationTimePicker" type="text"
+											id="reservation-made-from_new" class="balance-date"
+											ng-model="extraCharges.settingForm[$index].reservationDateMadeFromFilterNew"
+											datetime-picker date-format="yyyy-MM-dd" date-only /> <label
+											for="reservation-made-from_new"
+											style="float: left; margin: 0% 8% 0% 1%"><i
+											class="fa fa-calendar fa-2x" aria-hidden="true"></i></label>
+
+										<div class="marginForData">
+											<label>Till:</label>
+										</div>
+										<input class="ReservationTimePicker" type="text"
+											id="reservation-made-till_new" class="balance-date"
+											ng-model="extraCharges.settingForm[$index].reservationDateMadeTillFilterNew"
+											datetime-picker date-format="yyyy-MM-dd" date-only /> <label
+											for="reservation-made-till_new"
+											style="float: left; margin-left: 1%;"><i
+											class="fa fa-calendar fa-2x" aria-hidden="true"></i></label>
+
+									</div>
+
+									<br> <br>
+									<div class="pure-u-1-1 marginBottom">
+										<div class="marginBottom">Period for reserved item</div>
+
+										<div>
+											<label>From: </label>
+										</div>
+										<input class="ReservationTimePicker" type="text"
+											id="reservation-item-from_new"
+											ng-model="extraCharges.settingForm[$index].reservationDateItemFromFilterNew"
+											datetime-picker date-format="yyyy-MM-dd" date-only /> <label
+											for="reservation-item-from_new"
+											style="float: left; margin: 0% 8% 0% 1%;"><i
+											class="fa fa-calendar fa-2x" aria-hidden="true"
+											ng-keyup="loadData()"></i></label>
+										<div class="marginForData">
+											<label>Till:</label>
+										</div>
+										<input class="ReservationTimePicker"
+											id="reservation-item-till_new" type="text"
+											ng-model="extraCharges.settingForm[$index].reservationDateItemTillFilterNew"
+											datetime-picker date-format="yyyy-MM-dd" date-only /> <label
+											for="reservation-item-till_new"
+											style="float: left; margin-left: 1%;"><i
+											class="fa fa-calendar fa-2x" aria-hidden="true"
+											ng-keyup="loadData()"></i></label>
+									</div>
+								</div>
+								<div class="marginBottom">
+									<label for="minNightsOfStay">Min Nights of Stay </label> <input
+										type="text" id="minNightsOfStay" min="0" max="100"
+										ng-model="extraCharges.settingForm[$index].minNightsOfStay"
+										placeholder="Enter Min Nights of Stay"
+										replace-spaces-with-dashes="false" ng-required="true">
+									</input>
+								</div>
+								<div class="marginBottom">
+									<label for="maxNightsOfStay">Max Nights of Stay </label> <input
+										type="text" id="maxNightsOfStay" min="0" max="100"
+										ng-model="extraCharges.settingForm[$index].maxNightsOfStay"
+										placeholder="Enter Max Nights of Stay"
+										replace-spaces-with-dashes="false" ng-required="true">
+									</input>
+								</div>
+
+								<br>
+								<div class="marginBottom">
+									<span class = "fontSize"> Payment Time Limit </span>
+								</div>
+								<div class="pure-u-1-1">
+									<div class="pure-u-1-3">
+										<label for="daysBeforeArrivalDate">Days before arrival
+											date: </label> <input type="text" id="daysBeforeArrivalDate" min="0"
+											max="100"
+											ng-model="extraCharges.settingForm[$index].paymentDays"
+											replace-spaces-with-dashes="false" ng-required="true">
+										</input>
+									</div>
+									<div class="pure-u-1-3">
+										<input type="checkbox"
+											ng-model="extraCharges.settingForm[$index].paymentUponBooking">
+										<label> 100% Payment upon booking </label>
+									</div>
+								</div>
+
+								<div class="add-forms2">
+									<label>ACTIVE</label> <input type="radio" name="stat"
+										ng-value="'ACTIVE'"
+										ng-model="extraCharges.settingForm[$index].status" checked>
+									<label>CLOSED</label> <input type="radio" name="stat"
+										ng-value="'CLOSED'"
+										ng-model="extraCharges.settingForm[$index].status">
+								</div>
+							</div>
+						</div>
+
+						<div class="pure-u-1-3">
+							<button class="pure-button" ng-click="addSettingForService()">+</button>
+							<button class="pure-button" ng-click="removeSettingForService()"
+								ng-show="extraCharges.settingForm.length > 1">-</button>
+						</div>
+						<div class="buttomSave">
+							<button class="pure-button create-company-button"
+								ng-click="saveData()" ng-disabled="disabledForm">
+								<i class="fa fa-plus"></i> Save
+							</button>
+						</div>
+					</div>
+				</form>
+
+
+			</div>
+		</div>
+		<script type='text/javascript'
+			src='/resources/bower_components/angular/angular.min.js'></script>
+		<script type='text/javascript'
+			src='/resources/bower_components/angular-route/angular-route.min.js'></script>
+		<script type='text/javascript'
+			src='/resources/bower_components/angular-resource/angular-resource.min.js'></script>
+		<script type='text/javascript'
+			src='/resources/bower_components/angular-messages/angular-messages.min.js'></script>
+		<script type='text/javascript'
+			src='/resources/bower_components/spring-security-csrf-token-interceptor-extended/dist/spring-security-csrf-token-interceptor-extended.min.js'></script>
+		<script type='text/javascript'
+			src='/resources/bower_components/ng-tags-input/ng-tags-input.min.js'></script>
+		<script type='text/javascript'
+			src='/resources/bower_components/lodash/lodash-2.4.1/dist/lodash.min.js'></script>
+		<script
+			src="/resources/bower_components/ng-file-upload/ng-file-upload-shim.min.js"></script>
+		<script
+			src="/resources/bower_components/ng-file-upload/ng-file-upload.min.js"></script>
+		<script
+			src="/resources/bower_components/stomp-websocket/lib/stomp.min.js"></script>
+		<script src="/resources/bower_components/sockjs/sockjs.min.js"></script>
+		<script
+			src="/resources/bower_components/angularjs-datetime-picker/angularjs-datetime-picker.js"></script>
+
+		<script
+			src="/resources/bower_components/angularjs-datetime-picker/angularjs-datetime-picker.min.js"></script>
+
+		<script type="text/javascript" src="js/admin.js"></script>
+		<script type="text/javascript" src="js/frontend-services.js"></script>
+		<script type="text/javascript" src="../include/js/admin.js"></script>
+		<script type="text/javascript"
+			src="../include/js/frontend-services.js"></script>
+
+		</script>
+		</form>
+		</main>
+	</div>
+	</div>
+
+</body>
+
+</html>
